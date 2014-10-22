@@ -650,65 +650,6 @@
     </param>
   </block>
   <block>
-    <key>blocks_repack_bits_bb</key>
-    <param>
-      <key>id</key>
-      <value>blocks_repack_bits_bb_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>k</key>
-      <value>8</value>
-    </param>
-    <param>
-      <key>l</key>
-      <value>cp.bits_per_uncoded_symbol</value>
-    </param>
-    <param>
-      <key>len_tag_key</key>
-      <value>cp.length_tag_name</value>
-    </param>
-    <param>
-      <key>align_output</key>
-      <value>False</value>
-    </param>
-    <param>
-      <key>blockwise</key>
-      <value>False</value>
-    </param>
-    <param>
-      <key>blk</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(544, 203)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
     <key>virtual_sink</key>
     <param>
       <key>id</key>
@@ -1096,30 +1037,30 @@
     </param>
   </block>
   <block>
-    <key>blocks_stream_to_tagged_stream</key>
+    <key>blocks_repack_bits_bb</key>
     <param>
       <key>id</key>
-      <value>blocks_stream_to_tagged_stream_0</value>
+      <value>blocks_repack_bits_bb_0</value>
     </param>
     <param>
       <key>_enabled</key>
       <value>True</value>
     </param>
     <param>
-      <key>type</key>
-      <value>byte</value>
+      <key>k</key>
+      <value>8</value>
     </param>
     <param>
-      <key>vlen</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>packet_len</key>
-      <value>cp.additional_symbols_per_frame</value>
+      <key>l</key>
+      <value>cp.bits_per_uncoded_symbol[0]</value>
     </param>
     <param>
       <key>len_tag_key</key>
-      <value>"packet_len"</value>
+      <value>cp.length_tag_name</value>
+    </param>
+    <param>
+      <key>align_output</key>
+      <value>False</value>
     </param>
     <param>
       <key>alias</key>
@@ -1139,7 +1080,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(296, 323)</value>
+      <value>(544, 203)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1162,11 +1103,11 @@
     </param>
     <param>
       <key>vector</key>
-      <value>(cp.additional_symbols_per_frame)*(0,)</value>
+      <value>(cp.additional_redundant_symbols_per_frame[0])*(0,)</value>
     </param>
     <param>
       <key>tags</key>
-      <value>tagged_streams.make_lengthtags((cp.additional_symbols_per_frame,), (0,), cp.length_tag_name)</value>
+      <value>tagged_streams.make_lengthtags((cp.additional_redundant_symbols_per_frame[0],), (0,), cp.length_tag_name)</value>
     </param>
     <param>
       <key>repeat</key>
@@ -1195,6 +1136,57 @@
     <param>
       <key>_coordinate</key>
       <value>(16, 315)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>blocks_stream_to_tagged_stream</key>
+    <param>
+      <key>id</key>
+      <value>blocks_stream_to_tagged_stream_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>byte</value>
+    </param>
+    <param>
+      <key>vlen</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>packet_len</key>
+      <value>cp.additional_redundant_symbols_per_frame[0]</value>
+    </param>
+    <param>
+      <key>len_tag_key</key>
+      <value>"packet_len"</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(296, 323)</value>
     </param>
     <param>
       <key>_rotation</key>
