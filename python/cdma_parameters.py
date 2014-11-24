@@ -94,7 +94,11 @@ class cdma_parameters:
 
 print "CDMA PARAMETERS : for adaptive modulation"
 
+<<<<<<< HEAD
 prefix="/home/zhe/Videos/gr-cdma/"  # put the prefix of your gr-cdma trunk
+=======
+prefix="/home/anastas/gr-cdma/"  # put the prefix of your gr-cdma trunk
+>>>>>>> c69e3549d2cd49555d71054fa6f133bb5aabe1ca
 
 length_tag_name = "packet_len"
 num_tag_name = "packet_num"
