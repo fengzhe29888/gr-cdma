@@ -94,18 +94,13 @@ class cdma_parameters:
 
 print "CDMA PARAMETERS : for adaptive modulation"
 
-<<<<<<< HEAD
-prefix="/home/zhe/Videos/gr-cdma/"  # put the prefix of your gr-cdma trunk
-=======
 prefix="/home/anastas/gr-cdma/"  # put the prefix of your gr-cdma trunk
->>>>>>> c69e3549d2cd49555d71054fa6f133bb5aabe1ca
 
 length_tag_name = "packet_len"
 num_tag_name = "packet_num"
 
-# the parameters for crc as an outer code. 
 # header info
-bits_per_header=12+12+8+4;  #four bits to indicate tcm_type in packet_header2.
+bits_per_header=12+12+8+4;  #Zhe Changed 12+16+8 to 12+12+8 because only 12 bits not 16 bits are needed. 4 bits indicating modulation and code mode.
 
 header_mod = digital.constellation_bpsk();
 symbols_per_header = bits_per_header/header_mod.bits_per_symbol()
@@ -113,67 +108,79 @@ if (1.0*bits_per_header)/header_mod.bits_per_symbol() != symbols_per_header:
   print "Error in evaluating symbols per header; adjusting bits per header"
   bits_per_header=(symbols_per_header+1)*header_mod.bits_per_symbol()
   symbols_per_header = bits_per_header/header_mod.bits_per_symbol()
+#header_formatter = cdma.packet_header(bits_per_header,length_tag_name,num_tag_name,header_mod.bits_per_symbol());
 
+#header_formatter = digital.packet_header_default(bits_per_header,  length_tag_name,num_tag_name,header_mod.bits_per_symbol());
+#tcm_indicator_symbols_per_frame=4; #Zhe added, 4 bits are used as tcm mode indicator, it is used as a part of header.
+
+# Achilles' comment: this may change later when filler bits are introduced...
 print "bits_per_header=",bits_per_header
 print "symbols_per_header=",symbols_per_header
+#print "tcm_indicator_symbols_per_frame=",tcm_indicator_symbols_per_frame
 print "\n"
 
 #trellis coding and modulation info
 
-payload_mod = [digital.constellation_qpsk(),digital.constellation_8psk_natural(),digital.constellation_16qam()];
+payload_mod = [digital.constellation_qpsk(),digital.constellation_8psk_natural(),digital.constellation_16qam()]
 
-pdir=prefix+"/python/fsm_files/";
-fsm=[pdir+"awgn2o2_1.fsm", pdir+"awgn2o3_8ungerboecka.fsm",pdir+"awgn2o4_8_ungerboeckc.fsm"];
-uncoded_fsm=[trellis.fsm(2,2,[1,0,0,1]),trellis.fsm(3,3,[1,0,0,0,1,0,0,0,1]),trellis.fsm(4,4,[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1])];
+pdir=prefix+"/python/fsm_files/"
+fsm=[pdir+"awgn2o2_1.fsm", pdir+"awgn2o3_8ungerboecka.fsm",pdir+"awgn2o4_8_ungerboeckc.fsm"]
+uncoded_fsm=[trellis.fsm(2,2,[1,0,0,1]),trellis.fsm(3,3,[1,0,0,0,1,0,0,0,1]),trellis.fsm(4,4,[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1])]
 
-if len(fsm)!=len(payload_mod):
-  print "Error in selecting trellis code and modulation size.They should be the same."
-tcm_size = len(fsm); #size of fsm and mod lists
+bits_per_coded_symbol=[int(math.log(trellis.fsm(fsm[i]).O(),2)) for i in range(len(payload_mod))]
 
-#Achilles comment: this should be log_2(fsm.I), fixed!
-bits_per_uncoded_symbol = [int(math.log(trellis.fsm(fsm[i]).I(),2)) for i in range(tcm_size)]; # bits per uncoded symbols equals the log2 of fsm's input cardinality
-bits_per_coded_symbol=[int(math.log(trellis.fsm(fsm[i]).O(),2)) for i in range(tcm_size)];
-print "bits_per_coded_symbol =", bits_per_coded_symbol, " for [uncoded QPSK, rate 2/3 cc &8PSK, rate 2/4 cc &16QAM] respectively.\n"
-if bits_per_coded_symbol!=[payload_mod[i].bits_per_symbol() for i in range(tcm_size)]:
+#coding_rate=[Fraction(int(math.log(trellis.fsm(fsm[i]).I(),2)), int(math.log(trellis.fsm(fsm[i]).O(),2))) for i in range(len(fsm))]
+
+if bits_per_coded_symbol!=[payload_mod[i].bits_per_symbol() for i in range(len(payload_mod))]:
   print "Error in selecting trellis code and modulation pairs."
 
+print "bits_per_coded_symbol =", bits_per_coded_symbol, " for [uncoded QPSK, rate 2/3 cc &8PSK, rate 2/4 cc &16QAM] respectively.\n"
+#print "coding rates for trellis codes =", coding_rate, " for [uncoded QPSK, rate 2/3 cc &8PSK, rate 2/4 cc &16QAM] respectively.\n"
+
+
 #payload info
-payload_bytes_per_frame = 49;	# set by user
+payload_bytes_per_frame = 50;	# set by user
 symbols_per_frame = 260; # symbols per frame set by user
+
+#Achilles comment: this should be log_2(fsm.I)
+bits_per_uncoded_symbol = 2; # bits per uncoded symbols of payload
 
 # the parameters for crc as an outer code. 
 crc_bytes=4; 
-crc_coded_payload_bytes_per_frame = payload_bytes_per_frame + crc_bytes;  #crc as the outer code.
+crc_coded_payload_bytes_per_frame = payload_bytes_per_frame + crc_bytes;  #crc as the outer code, code it first.
 
-# Achilles' comment: there is an assumption here that (50+4)8 will be a multiple of k. You need to stuff BITS in here, fixed!
-additional_make_multiple_bytes_per_frame = [0 if crc_coded_payload_bytes_per_frame%bits_per_uncoded_symbol[i]==0 else bits_per_uncoded_symbol[i]-crc_coded_payload_bytes_per_frame%bits_per_uncoded_symbol[i] for i in range(tcm_size)]  #this additional_bytes is added before the crc encoder. The redundancy in payload
-
-crc_coded_payload_and_additional_bytes_per_frame = [crc_coded_payload_bytes_per_frame + additional_make_multiple_bytes_per_frame[i] for i in range(tcm_size)]
-
-crc_coded_payload_symbols_per_frame = [int(crc_coded_payload_and_additional_bytes_per_frame[i]*8/bits_per_uncoded_symbol[i]) for i in range(tcm_size)]; #crc coded payload symbols.
+# Achilles' comment: there is an assumption here that (50+4)8 will be a multiple of k. You need to stuff BITS in here
+crc_coded_payload_symbols_per_frame = crc_coded_payload_bytes_per_frame*8/bits_per_uncoded_symbol; #crc coded payload symbols.
 
 trellis_coded_payload_symbols_per_frame = crc_coded_payload_symbols_per_frame; #coded payload symbols equal the uncoded payload symbols.
-# Achilles' comment: assumption that this is a multiple of 8 !!! Zhe: additional_bytes_per_frame was not calculated to avoid a change in symbols_per_frame which would affect the whole cdma part. Since we only want to know the redundancy roughly, the redundant percent measured in terms of bits should be fine.  
 
-additional_redundant_symbols_per_frame = [symbols_per_frame - trellis_coded_payload_symbols_per_frame[i] - symbols_per_header for i in range(tcm_size) ];
-for i in range(tcm_size):
-  if additional_redundant_symbols_per_frame[i] < 0:
-    print "Error in setting symbols per frame. To form a frame with set payload_bytes_per_frame, you should set a larger number of symbols per frame"
+additional_symbols_per_frame = symbols_per_frame - trellis_coded_payload_symbols_per_frame - symbols_per_header ;
 
-total_redundant_bits = [(additional_redundant_symbols_per_frame[i]*bits_per_coded_symbol[i] + additional_make_multiple_bytes_per_frame[i]*8) for i in range(tcm_size)];
-redundant_bit_percent = [total_redundant_bits[i]/(payload_bytes_per_frame * 8) for i in range(tcm_size)];
+if additional_symbols_per_frame < 0:
+  print "Error in setting symbols per frame. To form a frame with set payload_bytes_per_frame, you should set a larger number of symbols per frame"
 
+# Achilles' comment: assumption that this is a multiple of 8 !!!
+additional_bytes_per_frame = [additional_symbols_per_frame * header_mod.bits_per_symbol()/8 for i in range(len(payload_mod))]; 
+
+trellis_coded_payload_bytes_per_frame = [trellis_coded_payload_symbols_per_frame*payload_mod[i].bits_per_symbol()/8 for i in range(len(payload_mod))]
+
+redudant_bytes_percents = [(1.0*additional_bytes_per_frame[i])/(trellis_coded_payload_bytes_per_frame[i]+additional_bytes_per_frame[i]) for i in range(len(additional_bytes_per_frame))];
 print "payload_bytes_per_frame=", payload_bytes_per_frame
 print "symbols_per_frame=", symbols_per_frame
+
 print "trellis_coded_payload_symbols_per_frame=",trellis_coded_payload_symbols_per_frame, " for [uncoded QPSK, rate 2/3 cc &8PSK, rate 2/4 cc &16QAM] respectively.\n"
-print "additional_make_multiple_bytes_per_frame=", additional_make_multiple_bytes_per_frame, " for [uncoded QPSK, rate 2/3 cc &8PSK, rate 2/4 cc &16QAM] respectively.\n"
-print "additional_redundant_symbols_per_frame=",additional_redundant_symbols_per_frame, " for [uncoded QPSK, rate 2/3 cc &8PSK, rate 2/4 cc &16QAM] respectively.\n"
-print "you have wasted",redundant_bit_percent,"percent of bits per payload for [uncoded QPSK, rate 2/3 cc &8PSK, rate 2/4 cc &16QAM] with this symbols_per_frame setting.\n"
+print "trellis_coded_payload_bytes_per_frame=", trellis_coded_payload_bytes_per_frame, " for [uncoded QPSK, rate 2/3 cc &8PSK, rate 2/4 cc &16QAM] respectively.\n"
+
+print "additional_symbols_per_frame=",additional_symbols_per_frame, " for [uncoded QPSK, rate 2/3 cc &8PSK, rate 2/4 cc &16QAM] respectively.\n"
+print "additional_bytes_per_frame=", additional_bytes_per_frame, " for [uncoded QPSK, rate 2/3 cc &8PSK, rate 2/4 cc &16QAM] respectively.\n"
+print "you have wasted",redudant_bytes_percents,"percent of bytes per payload for [uncoded QPSK, rate 2/3 cc &8PSK, rate 2/4 cc &16QAM] with this symbols_per_frame setting.\n"
 print "\n"
+
 
 # training info
 numpy.random.seed(666)
-training_long = (2*numpy.random.randint(0,2,symbols_per_frame)-1+0j);
+training_long = (2*numpy.random.randint(0,2,symbols_per_frame)-1+0j)
+
 training_length = symbols_per_frame; # number of non-zero training symbols
 if training_length > symbols_per_frame:
   print "Error in training length evaluation"

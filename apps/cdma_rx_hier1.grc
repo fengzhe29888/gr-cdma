@@ -411,9 +411,6 @@
     </param>
   </block>
   <block>
-<<<<<<< HEAD
-    <key>chopper_correlator1</key>
-=======
     <key>cdma_freq_timing_estimator</key>
     <param>
       <key>id</key>
@@ -474,7 +471,6 @@
   </block>
   <block>
     <key>chopper_correlator</key>
->>>>>>> c69e3549d2cd49555d71054fa6f133bb5aabe1ca
     <param>
       <key>id</key>
       <value>chopper_correlator_0</value>
@@ -755,6 +751,29 @@
     <param>
       <key>_coordinate</key>
       <value>(327, 628)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>virtual_sink</key>
+    <param>
+      <key>id</key>
+      <value>virtual_sink_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>stream_id</key>
+      <value>chopper_input</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(537, 641)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1155,6 +1174,29 @@
     </param>
   </block>
   <block>
+    <key>virtual_source</key>
+    <param>
+      <key>id</key>
+      <value>virtual_source_0_1_0_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>stream_id</key>
+      <value>header_freq_corrected</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(8, 1485)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
     <key>parameter</key>
     <param>
       <key>id</key>
@@ -1210,6 +1252,80 @@
     <param>
       <key>_coordinate</key>
       <value>(28, 483)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>blocks_keep_m_in_n</key>
+    <param>
+      <key>id</key>
+      <value>blocks_keep_m_in_n_0_1_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>complex</value>
+    </param>
+    <param>
+      <key>m</key>
+      <value>cp.trellis_coded_payload_symbols_per_frame</value>
+    </param>
+    <param>
+      <key>n</key>
+      <value>cp.symbols_per_frame</value>
+    </param>
+    <param>
+      <key>offset</key>
+      <value>cp.symbols_per_header</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(272, 1191)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>virtual_source</key>
+    <param>
+      <key>id</key>
+      <value>virtual_source_0_1_0_1_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>stream_id</key>
+      <value>payload_freq_corrected</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(7, 1678)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1290,103 +1406,6 @@
     </param>
   </block>
   <block>
-    <key>virtual_sink</key>
-    <param>
-      <key>id</key>
-      <value>virtual_sink_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>stream_id</key>
-      <value>chopper_input</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(560, 643)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_keep_m_in_n</key>
-    <param>
-      <key>id</key>
-      <value>blocks_keep_m_in_n_0_1_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>complex</value>
-    </param>
-    <param>
-      <key>m</key>
-      <value>cp.trellis_coded_payload_symbols_per_frame[est_tcm_type]</value>
-    </param>
-    <param>
-      <key>n</key>
-      <value>cp.symbols_per_frame</value>
-    </param>
-    <param>
-      <key>offset</key>
-      <value>cp.symbols_per_header</value>
-    </param>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(272, 1191)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>virtual_source</key>
-    <param>
-      <key>id</key>
-      <value>virtual_source_0_1_0_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>stream_id</key>
-      <value>header_freq_corrected</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(8, 1475)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
     <key>digital_constellation_decoder_cb</key>
     <param>
       <key>id</key>
@@ -1418,7 +1437,168 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(240, 1475)</value>
+      <value>(290, 1485)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>trellis_viterbi_combined_xx</key>
+    <param>
+      <key>id</key>
+      <value>trellis_viterbi_combined_xx_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>c</value>
+    </param>
+    <param>
+      <key>out_type</key>
+      <value>b</value>
+    </param>
+    <param>
+      <key>fsm_args</key>
+      <value>trellis.fsm(cp.fsm[est_tcm_type])</value>
+    </param>
+    <param>
+      <key>block_size</key>
+      <value>cp.trellis_coded_payload_symbols_per_frame</value>
+    </param>
+    <param>
+      <key>init_state</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>final_state</key>
+      <value>-1</value>
+    </param>
+    <param>
+      <key>dim</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>table</key>
+      <value>[x*cp.rx_scaling_factor[est_tcm_type] for x in cp.payload_mod[est_tcm_type].points()]</value>
+    </param>
+    <param>
+      <key>metric_type</key>
+      <value>digital.TRELLIS_EUCLIDEAN</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(266, 1630)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>blocks_repack_bits_bb</key>
+    <param>
+      <key>id</key>
+      <value>blocks_repack_bits_bb_0_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>k</key>
+      <value>cp.bits_per_uncoded_symbol</value>
+    </param>
+    <param>
+      <key>l</key>
+      <value>8</value>
+    </param>
+    <param>
+      <key>len_tag_key</key>
+      <value></value>
+    </param>
+    <param>
+      <key>align_output</key>
+      <value>False</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(536, 1655)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>pad_sink</key>
+    <param>
+      <key>id</key>
+      <value>pad_sink_0_1_0_0_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>label</key>
+      <value>decoded_payload_bytes</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>byte</value>
+    </param>
+    <param>
+      <key>vlen</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>num_streams</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>optional</key>
+      <value>False</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(392, 2068)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1465,7 +1645,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(472, 1475)</value>
+      <value>(464, 1540)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1508,7 +1688,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(680, 1467)</value>
+      <value>(632, 1477)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1547,7 +1727,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(952, 1475)</value>
+      <value>(952, 1484)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1555,104 +1735,30 @@
     </param>
   </block>
   <block>
-    <key>virtual_source</key>
+    <key>blocks_stream_to_tagged_stream</key>
     <param>
       <key>id</key>
-      <value>virtual_source_0_1_0_1_0</value>
+      <value>blocks_stream_to_tagged_stream_0</value>
     </param>
     <param>
       <key>_enabled</key>
       <value>True</value>
-    </param>
-    <param>
-      <key>stream_id</key>
-      <value>payload_freq_corrected</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(40, 1603)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_repack_bits_bb</key>
-    <param>
-      <key>id</key>
-      <value>blocks_repack_bits_bb_0_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>k</key>
-      <value>cp.bits_per_uncoded_symbol[est_tcm_type]</value>
-    </param>
-    <param>
-      <key>l</key>
-      <value>8</value>
-    </param>
-    <param>
-      <key>len_tag_key</key>
-      <value></value>
-    </param>
-    <param>
-      <key>align_output</key>
-      <value>False</value>
-    </param>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(552, 1587)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_keep_m_in_n</key>
-    <param>
-      <key>id</key>
-      <value>blocks_keep_m_in_n_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>False</value>
     </param>
     <param>
       <key>type</key>
       <value>byte</value>
     </param>
     <param>
-      <key>m</key>
-      <value>50</value>
+      <key>vlen</key>
+      <value>1</value>
     </param>
     <param>
-      <key>n</key>
-      <value>54</value>
+      <key>packet_len</key>
+      <value>cp.crc_coded_payload_bytes_per_frame</value>
     </param>
     <param>
-      <key>offset</key>
-      <value>0</value>
+      <key>len_tag_key</key>
+      <value>cp.length_tag_name</value>
     </param>
     <param>
       <key>alias</key>
@@ -1672,7 +1778,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(136, 1851)</value>
+      <value>(136, 1917)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1715,282 +1821,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(384, 1771)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>pad_sink</key>
-    <param>
-      <key>id</key>
-      <value>pad_sink_0_1_0_0_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>label</key>
-      <value>decoded_payload_bytes</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>byte</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>num_streams</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>optional</key>
-      <value>False</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(792, 1867)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-<<<<<<< HEAD
-    <key>blocks_keep_m_in_n</key>
-    <param>
-      <key>id</key>
-      <value>blocks_keep_m_in_n_0_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>byte</value>
-    </param>
-    <param>
-      <key>m</key>
-      <value>cp.payload_bytes_per_frame</value>
-    </param>
-    <param>
-      <key>n</key>
-      <value>cp.payload_bytes_per_frame+cp.additional_make_multiple_bytes_per_frame[est_tcm_type]</value>
-    </param>
-    <param>
-      <key>offset</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(616, 1763)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>cdma_freq_timing_estimator1</key>
-=======
-    <key>blocks_stream_to_tagged_stream</key>
->>>>>>> c69e3549d2cd49555d71054fa6f133bb5aabe1ca
-    <param>
-      <key>id</key>
-      <value>cdma_freq_timing_estimator1_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>seq1</key>
-      <value>(0+0j,) if acq==0 else cp.training[::-1]</value>
-    </param>
-    <param>
-      <key>seq2</key>
-      <value>(0+0j,) if acq==0 else cp.pulse_training[::-1]</value>
-    </param>
-    <param>
-      <key>factor</key>
-      <value>10**(acq_threshold_dB/10)*peak_o_var</value>
-    </param>
-    <param>
-      <key>alpha</key>
-      <value>0.01</value>
-    </param>
-    <param>
-      <key>samp_rate</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>freqs</key>
-      <value>freqs</value>
-    </param>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(288, 443)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>trellis_viterbi_combined_xx</key>
-    <param>
-      <key>id</key>
-      <value>trellis_viterbi_combined_xx_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>c</value>
-    </param>
-    <param>
-      <key>out_type</key>
-      <value>b</value>
-    </param>
-    <param>
-      <key>fsm_args</key>
-      <value>trellis.fsm(cp.fsm[est_tcm_type])</value>
-    </param>
-    <param>
-      <key>block_size</key>
-      <value>cp.trellis_coded_payload_symbols_per_frame[est_tcm_type]</value>
-    </param>
-    <param>
-      <key>init_state</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>final_state</key>
-      <value>-1</value>
-    </param>
-    <param>
-      <key>dim</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>table</key>
-      <value>[x*cp.rx_scaling_factor[est_tcm_type] for x in cp.payload_mod[est_tcm_type].points()]</value>
-    </param>
-    <param>
-      <key>metric_type</key>
-      <value>digital.TRELLIS_EUCLIDEAN</value>
-    </param>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(280, 1555)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_stream_to_tagged_stream</key>
-    <param>
-      <key>id</key>
-      <value>blocks_stream_to_tagged_stream_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>byte</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>packet_len</key>
-      <value>cp.crc_coded_payload_and_additional_bytes_per_frame[est_tcm_type]</value>
-    </param>
-    <param>
-      <key>len_tag_key</key>
-      <value>cp.length_tag_name</value>
-    </param>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(128, 1771)</value>
+      <value>(424, 1917)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2148,6 +1979,18 @@
     <sink_key>0</sink_key>
   </connection>
   <connection>
+    <source_block_id>trellis_viterbi_combined_xx_0</source_block_id>
+    <sink_block_id>blocks_repack_bits_bb_0_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>virtual_source_0_1_0_1_0</source_block_id>
+    <sink_block_id>trellis_viterbi_combined_xx_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
     <source_block_id>RX_0_2_1</source_block_id>
     <sink_block_id>cdma_freq_timing_estimator_0</sink_block_id>
     <source_key>0</source_key>
@@ -2172,15 +2015,14 @@
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>blocks_repack_bits_bb_0_0</source_block_id>
-    <sink_block_id>blocks_keep_m_in_n_0</sink_block_id>
+    <source_block_id>digital_crc32_bb_1</source_block_id>
+    <sink_block_id>pad_sink_0_1_0_0_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
     <source_block_id>blocks_tag_gate_0</source_block_id>
     <sink_block_id>cdma_packet_headerparser_b2_default_0</sink_block_id>
-<<<<<<< HEAD
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
@@ -2188,38 +2030,6 @@
     <source_block_id>cdma_packet_headerparser_b2_default_0</source_block_id>
     <sink_block_id>zzz_pad_sink_0_1_0_1_0</sink_block_id>
     <source_key>header_data</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>virtual_source_0_1_0_1_0</source_block_id>
-    <sink_block_id>trellis_viterbi_combined_xx_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>trellis_viterbi_combined_xx_0</source_block_id>
-    <sink_block_id>blocks_repack_bits_bb_0_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>blocks_keep_m_in_n_0</source_block_id>
-    <sink_block_id>pad_sink_0_1_0_0_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>digital_crc32_bb_1</source_block_id>
-    <sink_block_id>blocks_keep_m_in_n_0_0</sink_block_id>
-=======
->>>>>>> c69e3549d2cd49555d71054fa6f133bb5aabe1ca
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>blocks_keep_m_in_n_0_0</source_block_id>
-    <sink_block_id>pad_sink_0_1_0_0_0</sink_block_id>
-    <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
 </flow_graph>
